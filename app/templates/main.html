@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оформлення заявки на платіж</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Оформлення заявки на платіж</h1>
+        </div>
+        
+        <div class="form-group">
+            <label for="limit">Поточний ліміт:</label>
+            <input type="text" id="limit" value="0.00" readonly>
+            <button id="change-limit">Змінити</button>
+        </div>
+
+        <div class="form-group">
+            <label for="applicant">Заявник:</label>
+            <select id="applicant">
+                <option>Олег</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="payer">Оберіть платника:</label>
+            <select id="payer">
+                <option>Я</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="manager">Оберіть керівника:</label>
+            <select id="manager">
+                <option>Рома</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="recipient">Оберіть отримувача:</label>
+            <input type="text" id="recipient" placeholder="Отримувач">
+        </div>
+
+        <div class="form-group">
+            <label for="category">Оберіть категорію:</label>
+            <select id="category">
+                <option>Трактор</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Вкажіть суму:</label>
+            <input type="number" id="amount" placeholder="Тільки (0-9)">
+        </div>
+
+        <div class="form-group">
+            <label for="document">Прикріпіть документ:</label>
+            <input type="file" id="document">
+        </div>
+
+        <div class="form-group">
+            <label for="comment">Коментар:</label>
+            <textarea id="comment"></textarea>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Заявник</th>
+                    <th>Платник</th>
+                    <th>Керівник</th>
+                    <th>Опис</th>
+                    <th>Сума</th>
+                    <th>Категорія</th>
+                    <th>Документ</th>
+                    <th>Статус</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Олег</td>
+                    <td>Я</td>
+                    <td>Богдан</td>
+                    <td>dasdad</td>
+                    <td>1,212.00</td>
+                    <td>Трактор</td>
+                    <td>C:/Users/Богдан/Desktop/...</td>
+                    <td>Погоджено</td>
+                </tr>
+                <!-- Більше рядків тут -->
+            </tbody>
+        </table>
+
+        <div class="form-actions">
+            <button id="reset-limit">Обнулити ліміт</button>
+            <button id="submit">Відправити</button>
+        </div>
+    </div>
+</body>
+</html>
