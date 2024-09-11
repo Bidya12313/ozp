@@ -1,7 +1,7 @@
 from sqlalchemy import select, insert
 
 from engine import session_factory
-from models import Base, Declarants, Payers, Directors, Categories, Banks
+from .models import Base, Declarants, Payers, Directors, Categories, Banks
 
 
 def get_all_declarants():
