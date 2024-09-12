@@ -31,14 +31,18 @@
         <div class="form-group">
             <label for="payer">Оберіть платника:</label>
             <select id="payer">
-                <option>Я</option>
+                {%for payer in payers%}
+                <option>{{payer}}</option>
+                {%endfor%}
             </select>
         </div>
 
         <div class="form-group">
             <label for="manager">Оберіть керівника:</label>
             <select id="manager">
-                <option>Рома</option>
+                {%for director in directors%}
+                <option>{{director}}</option>
+                {%endfor%}
             </select>
         </div>
 
@@ -50,7 +54,9 @@
         <div class="form-group">
             <label for="category">Оберіть категорію:</label>
             <select id="category">
-                <option>Трактор</option>
+                {%for category in categories%}
+                <option>{{category}}</option>
+                {%endfor%}
             </select>
         </div>
 

@@ -1,6 +1,6 @@
 from sqlalchemy import select, insert
 
-from engine import session_factory
+from .engine import session_factory
 from .models import Base, Declarants, Payers, Directors, Categories, Banks
 
 
@@ -42,4 +42,3 @@ def get_all_directors():
         result = session.execute(query)
         directors = result.scalars().all()
     return directors
-

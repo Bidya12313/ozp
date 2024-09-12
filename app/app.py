@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def main():
-    return render_template('main.html', declarants=get_all_declarants())
+    return render_template('main.html', declarants=get_all_declarants(), payers=get_all_payers(), directors=get_all_directors(), categories=get_all_categories())
 
 
 if __name__ == '__main__':

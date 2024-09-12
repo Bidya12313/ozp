@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Mapped, mapped_column
 
-from engine import Base
+from .engine import Base
 
 
 class Declarants(Base):
