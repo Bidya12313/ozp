@@ -1,14 +1,46 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, redirect, url_for
+from flask_login import LoginManager, login_user
 
-from database.queries import get_all_declarants, get_all_payers, get_all_categories, get_all_directors
+from database.queries import get_all_declarants, get_all_payers, get_all_categories, get_all_directors, get_declarant, get_password, get_user_id
+from .forms import LoginForm
 
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'Ignds eefsdfndsofihihdi f23'
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return get_user_id(user_id)
 
 
 @app.route('/')
 def main():
     return render_template('main.html', declarants=get_all_declarants(), payers=get_all_payers(), directors=get_all_directors(), categories=get_all_categories())
+
+
+@app.route('/login')
+def login():
+    login_form = LoginForm()
+    return render_template('login.html', form=login_form)
+
+
+@app.route('/procces_login', methods=['POST'])
+def procces_login():
+    form = LoginForm()
+
+    if form.validate_on_submit():
+        user = get_declarant(form.username.data)
+        print(form.password.data)
+        print(get_password('Bodya'))
+        if form.password.data == get_password(user):
+            login_user(user)
+            return redirect(url_for('main'))
+        flash("Не правильне ім'я або пароль")
+        return redirect(url_for('login'))
 
 
 if __name__ == '__main__':
