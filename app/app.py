@@ -1,7 +1,7 @@
 from flask import Flask, render_template, flash, redirect, url_for
 from flask_login import LoginManager, login_user
 
-from database.queries import get_all_declarants, get_all_payers, get_all_categories, get_all_directors, get_declarant, get_password, get_user_id
+from database.queries import get_all_declarants, get_all_payers, get_all_categories, get_all_directors, get_declarant, get_user
 from .forms import LoginForm
 
 
@@ -14,7 +14,7 @@ login_manager.login_view = 'login'
 
 @login_manager.user_loader
 def load_user(user_id):
-    return get_user_id(user_id)
+    return get_user(user_id)
 
 
 @app.route('/')
@@ -34,9 +34,7 @@ def procces_login():
 
     if form.validate_on_submit():
         user = get_declarant(form.username.data)
-        print(form.password.data)
-        print(get_password('Bodya'))
-        if form.password.data == get_password(user):
+        if user and int(form.password.data) == int(user.password):
             login_user(user)
             return redirect(url_for('main'))
         flash("Не правильне ім'я або пароль")

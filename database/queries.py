@@ -46,7 +46,7 @@ def get_all_directors():
 
 def get_declarant(user: str):
     with session_factory() as session:
-        query = select(Declarants.name).filter(Declarants.name==user)
+        query = select(Declarants).filter(Declarants.name==user)
         result = session.execute(query)
         declarant = result.scalars().first()
     return declarant
@@ -60,9 +60,9 @@ def get_password(user: str):
     return password
 
 
-def get_user_id(user_id: int):
+def get_user(user_id: int):
     with session_factory() as session:
-        query = select(Declarants.id).filter(Declarants.id==user_id)
+        query = select(Declarants).filter(Declarants.id==user_id)
         result = session.execute(query)
-        user_id = result.scalars().first()
-    return user_id
+        user = result.scalars().first()
+    return user

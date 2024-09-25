@@ -6,9 +6,24 @@ from .engine import Base
 class Declarants(Base):
     __tablename__ = 'declarants'
     id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column()
+    name: Mapped[str] = mapped_column(unique=True)
     password: Mapped[int] = mapped_column()
     chat_id: Mapped[int] = mapped_column()
+
+    @property
+    def is_authenticated(self):
+        return True  
+    
+    @property
+    def is_active(self):
+        return True  
+    
+    @property
+    def is_anonymous(self):
+        return False  
+    
+    def get_id(self):
+        return str(self.id)  
 
 
 class Payers(Base):
