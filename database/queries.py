@@ -2,6 +2,7 @@ from sqlalchemy import select, insert
 
 from .engine import session_factory
 from .models import Base, Declarants, Payers, Directors, Categories, Banks
+from .system_models import Taxes
 
 
 def get_all_declarants():
@@ -66,3 +67,11 @@ def get_user(user_id: int):
         result = session.execute(query)
         user = result.scalars().first()
     return user
+
+
+def get_all_user_taxes(declarant):
+    with session_factory() as session:
+        query = select(Taxes).filter(Taxes.declarant==declarant)
+        result = session.execute(query)
+        user_taxes = result.scalars().all()
+    return user_taxes

@@ -82,3 +82,12 @@ th {
     text-align: right;
     margin-top: 20px;
 }
+
+.highlight {
+    background-color: #1a73c0; /* Світло-блакитний фон для виділення */
+}
+
+.table-wrapper {
+    max-height: calc(10 * 40px); /* Висота для 10 рядків, налаштуйте при необхідності */
+    overflow-y: auto; /* Вертикальна прокрутка */
+}

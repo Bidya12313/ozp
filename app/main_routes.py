@@ -5,8 +5,7 @@ from database.queries import (
     get_all_payers,
     get_all_categories,
     get_all_directors,
-    get_declarant,
-    get_user,
+    get_all_user_taxes,
 )
 
 
@@ -22,4 +21,5 @@ def main():
         payers=get_all_payers(),
         directors=get_all_directors(),
         categories=get_all_categories(),
+        user_taxes=get_all_user_taxes(declarant.name),
     )
