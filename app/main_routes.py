@@ -2,6 +2,7 @@ from flask import Blueprint, render_template
 from flask_login import login_required, current_user
 
 from database.queries import (
+    get_daily_budget,
     get_all_payers,
     get_all_categories,
     get_all_directors,
@@ -18,6 +19,7 @@ def main():
     return render_template(
         "main.html",
         declarant=declarant.name,
+        daily_budget=get_daily_budget(declarant.name),
         payers=get_all_payers(),
         directors=get_all_directors(),
         categories=get_all_categories(),
