@@ -10,3 +10,9 @@ class DailyBudget(Base):
     declarant: Mapped[str] = mapped_column(unique=True)
     budget: Mapped[float] = mapped_column(nullable=True)
     requested_budget: Mapped[Optional[int]] = mapped_column()
+
+
+class GeneralBudget(Base):
+    __tablename__ = 'general_budget'
+    id: Mapped[int] = mapped_column(primary_key=True)
+    budget: Mapped[float] = mapped_column(nullable=True)

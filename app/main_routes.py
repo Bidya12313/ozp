@@ -9,6 +9,10 @@ from database.queries import (
     get_all_user_taxes
 )
 
+from database.admin_queries import (
+    get_declarants_balances
+)
+
 
 main_routes = Blueprint('main', __name__)
 
@@ -36,6 +40,9 @@ def admin():
     declarant = current_user
     admin_status = declarant.admin_status
     if admin_status == '+':
-        return render_template("admin.html")
+        return render_template(
+            "admin.html",
+            daily_user_budget = get_declarants_balances()
+        )
     flash('Ви повинні бути адміністратором')
     return redirect(url_for('main.main'))

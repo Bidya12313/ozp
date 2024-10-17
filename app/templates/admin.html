@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 <body>
+    {% block body %}
     <div class="form-container">
         <div class="form-header">Залишок в системі</div>
         <div class="balance-box">2000.00 грн</div>
@@ -15,28 +16,34 @@
         <div class="form-header">Обнулення ліміту</div>
         <button class="button">Обнулити всі ліміти</button>
 
-        <table>
-            <tr>
-                <th>Олег</th>
-                <td>0.00</td>
-            </tr>
-            <tr>
-                <th>Гена</th>
-                <td>0.00</td>
-            </tr>
+        <table id="idbudgetTable">
+            <thead>
+                <tr>
+                    <th>Заявник</th>
+                    <th>Бюджет</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in daily_user_budget %}
+                <tr>
+                    <td>{{ user.declarant }}</td>
+                    <td>{{ '{:,.2f}'.format(user.budget) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
         </table>
 
         <div class="input-container">
             <label for="applicant">Заявник:</label>
-            <input type="text" id="applicant" name="applicant" placeholder="Заявник">
+            <input type="text" id="applicant" name="applicant" placeholder="Заявник" readonly>
         </div>
 
-        <div class="input-container">
-            <label for="limit">Ліміт:</label>
-            <input type="text" id="limit" name="limit" placeholder="-> 0">
-        </div>
-
-        <button class="button">Підтвердити</button>
+        <button class="button">Обнулити ліміт</button>
     </div>
+    
+    <!-- Script for select row and plug in forms in table -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    
+    {% endblock %}
 </body>
 </html>
