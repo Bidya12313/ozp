@@ -9,6 +9,7 @@ class Declarants(Base):
     name: Mapped[str] = mapped_column(unique=True)
     password: Mapped[int] = mapped_column()
     chat_id: Mapped[int] = mapped_column()
+    admin_status: Mapped[str] = mapped_column(nullable=True)
 
     @property
     def is_authenticated(self):

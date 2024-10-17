@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, flash, redirect, url_for
 from flask_login import login_required, current_user
 
 from database.queries import (
@@ -6,12 +6,14 @@ from database.queries import (
     get_all_payers,
     get_all_categories,
     get_all_directors,
-    get_all_user_taxes,
+    get_all_user_taxes
 )
 
 
 main_routes = Blueprint('main', __name__)
 
+
+# main page
 @main_routes.route('/')
 @login_required
 def main():
@@ -25,3 +27,15 @@ def main():
         categories=get_all_categories(),
         user_taxes=get_all_user_taxes(declarant.name),
     )
+
+
+# admin page
+@main_routes.route('/admin')
+@login_required
+def admin():
+    declarant = current_user
+    admin_status = declarant.admin_status
+    if admin_status == '+':
+        return render_template("admin.html")
+    flash('Ви повинні бути адміністратором')
+    return redirect(url_for('main.main'))
