@@ -1,0 +1,13 @@
+<!-- Навігаційна шапка -->
+<div class="navbar">
+    <div class="navbar-left">
+        <a href class="account-nickname">{{ declarant }}</a>
+        <a href="/" class="nav-link">Оформлення заявки</a>
+        {% if is_admin %}
+            <a href="/admin">Адмін</a>
+        {% endif %}
+    </div>
+    <div class="navbar-right">
+        <a href="/logout" class="nav-link">Вихід</a>
+    </div>
+</div>

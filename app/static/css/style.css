@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     background-color: #f0f0f0;
     margin: 0;
-    padding: 20px;
+    padding: 0px;
 }
 
 .container {
@@ -90,4 +90,34 @@ th {
 .table-wrapper {
     max-height: calc(10 * 40px); /* Висота для 10 рядків, налаштуйте при необхідності */
     overflow-y: auto; /* Вертикальна прокрутка */
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8f9fa;
+    padding: 10px 20px;
+    border-bottom: 1px solid #e7e7e7;
+}
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-right a {
+    margin-left: 20px;
+    text-decoration: none;
+    color: #007bff;
+}
+.navbar-right a:hover {
+    text-decoration: underline;
+}
+
+.account-nickname {
+    pointer-events: none;
+    font-weight: bold;
+    font-size: 18px; 
+    color: #333; 
+    margin-right: 15px;
 }

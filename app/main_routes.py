@@ -22,6 +22,7 @@ main_routes = Blueprint('main', __name__)
 @login_required
 def main():
     declarant = current_user
+    admin_status = declarant.admin_status == '+'
     return render_template(
         "main.html",
         declarant=declarant.name,
@@ -30,6 +31,7 @@ def main():
         directors=get_all_directors(),
         categories=get_all_categories(),
         user_taxes=get_all_user_taxes(declarant.name),
+        is_admin=admin_status
     )
 
 
@@ -42,6 +44,7 @@ def admin():
     if admin_status == '+':
         return render_template(
             "admin.html",
+            declarant=declarant.name,
             daily_user_budget = get_declarants_balances()
         )
     flash('Ви повинні бути адміністратором')

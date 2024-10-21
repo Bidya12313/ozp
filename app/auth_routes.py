@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, redirect, url_for, flash
-from flask_login import login_user
+from flask_login import login_user, logout_user, login_required
 from .forms import LoginForm
 
 from database.queries import get_declarant
@@ -7,6 +7,8 @@ from database.queries import get_declarant
 
 auth_routes = Blueprint('auth', __name__)
 
+
+# auth page
 @auth_routes.route("/login")
 def login():
     login_form = LoginForm()
@@ -24,3 +26,11 @@ def procces_login():
             return redirect(url_for("main.main"))
         flash("Не правильне ім'я або пароль")
         return redirect(url_for("auth.login"))
+    
+
+# logout page
+@auth_routes.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect(url_for('auth.login'))
