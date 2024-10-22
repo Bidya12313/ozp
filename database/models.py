@@ -3,13 +3,14 @@ from sqlalchemy.orm import Mapped, mapped_column
 from .engine import Base
 
 
-class Declarants(Base):
-    __tablename__ = 'declarants'
+class Users(Base):
+    __tablename__ = 'users'
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=True)
     password: Mapped[int] = mapped_column()
     chat_id: Mapped[int] = mapped_column()
     admin_status: Mapped[str] = mapped_column(nullable=True)
+    director_status: Mapped[str] = mapped_column(nullable=True)
 
     @property
     def is_authenticated(self):
@@ -31,13 +32,6 @@ class Payers(Base):
     __tablename__ = 'payers'
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column()
-
-
-class Directors(Base):
-    __tablename__ = 'directors'
-    id: Mapped[int] = mapped_column(primary_key=True)
-    name: Mapped[str] = mapped_column()
-    chat_id: Mapped[int] = mapped_column()
 
 
 class Categories(Base):

@@ -49,3 +49,15 @@ def admin():
         )
     flash('Ви повинні бути адміністратором')
     return redirect(url_for('main.main'))
+
+
+# director page
+@main_routes.route('/director')
+@login_required
+def director():
+    director = current_user
+    director_status = director.director_status
+    if director_status == '+':
+        return render_template(
+            "director.html"
+        )
