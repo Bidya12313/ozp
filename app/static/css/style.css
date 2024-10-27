@@ -126,3 +126,52 @@ th {
     color: #333; 
     margin-right: 15px;
 }
+
+.requests-container {
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.requests-container h3 {
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.request-card {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.request-card p {
+    margin: 5px 0;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+}
+
+.approve-btn, .reject-btn {
+    border: none;
+    padding: 5px 10px;
+    margin-left: 5px;
+    border-radius: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.approve-btn {
+    background-color: #4CAF50; /* Зелений колір */
+    color: white;
+}
+
+.reject-btn {
+    background-color: #f44336; /* Червоний колір */
+    color: white;
+}

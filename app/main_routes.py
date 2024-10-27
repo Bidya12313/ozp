@@ -68,6 +68,8 @@ def director():
     if user_status['is_director']:
         return render_template(
             "director.html",
+            declarant=declarant.name,
+            daily_user_budget = get_declarants_balances(),
             **user_status
         )
     flash('Ви повинні бути керівником')

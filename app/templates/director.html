@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для керівника</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+    <!-- navbar -->
+    {% include 'header.html' %}
+
+    {% block body %}
+    <div class="form-container">
+        <div class="form-header">Залишок в системі</div>
+        <input type="text" id="limit">
+        <table id="idbudgetTable">
+            <thead>
+                <tr>
+                    <th>Заявник</th>
+                    <th>Бюджет</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in daily_user_budget %}
+                <tr>
+                    <td>{{ user.declarant }}</td>
+                    <td>{{ '{:,.2f}'.format(user.budget) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <div class="input-container">
+            <label for="applicant">Заявник:</label>
+            <input type="text" id="applicant" name="applicant" placeholder="Заявник" readonly>
+            <label for="budget">Бюджет:</label>
+            <input type="number" id="budget" name="budget" placeholder="Бюджет">
+        </div>
+
+        <button class="button">Обнулити ліміт</button>
+    </div>
+    
+    <!-- Script for select row and plug in forms in table -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <div class="requests-container">
+        <h3>Заявки</h3>
+        <div id="requests-list">
+            <div class="request-card">
+                <p><strong>Кому:</strong> Богдан</p>
+                <p><strong>Відповідальний:</strong> Гена</p>
+                <p><strong>Платник:</strong> Я</p>
+                <p><strong>Отримувач:</strong> 32wws</p>
+                <p><strong>Сума:</strong> 33,999.0</p>
+                <p><strong>Категорія:</strong> Грузовик</p>
+                <p><strong>Комент:</strong> dddfdfvdf</p>
+                <div class="button-container">
+                    <button class="approve-btn">✔️</button>
+                    <button class="reject-btn">❌</button>
+                </div>
+            </div>
+            
+            <div class="request-card">
+                <p><strong>Кому:</strong> Олександр</p>
+                <p><strong>Відповідальний:</strong> Петро</p>
+                <p><strong>Платник:</strong> Компанія</p>
+                <p><strong>Отримувач:</strong> ABC123</p>
+                <p><strong>Сума:</strong> 15,000.0</p>
+                <p><strong>Категорія:</strong> Легковий</p>
+                <p><strong>Комент:</strong> Оплата послуг</p>
+                <div class="button-container">
+                    <button class="approve-btn">✔️</button>
+                    <button class="reject-btn">❌</button>
+                </div>
+            </div>
+            
+            <div class="request-card">
+                <p><strong>Кому:</strong> Марія</p>
+                <p><strong>Відповідальний:</strong> Іван</p>
+                <p><strong>Платник:</strong> Замовник</p>
+                <p><strong>Отримувач:</strong> ZXY456</p>
+                <p><strong>Сума:</strong> 10,500.0</p>
+                <p><strong>Категорія:</strong> Послуги</p>
+                <p><strong>Комент:</strong> Ремонт обладнання</p>
+                <div class="button-container">
+                    <button class="approve-btn">✔️</button>
+                    <button class="reject-btn">❌</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    
+    {% endblock %}
+</body>
+</html>
