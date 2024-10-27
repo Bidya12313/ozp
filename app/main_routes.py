@@ -17,12 +17,19 @@ from database.admin_queries import (
 main_routes = Blueprint('main', __name__)
 
 
+def get_user_status(user):
+    return {
+        'is_admin': user.admin_status == '+',
+        'is_director': user.director_status == '+'
+    }
+
+
 # main page
 @main_routes.route('/')
 @login_required
 def main():
     declarant = current_user
-    admin_status = declarant.admin_status == '+'
+    user_status = get_user_status(declarant)
     return render_template(
         "main.html",
         declarant=declarant.name,
@@ -31,7 +38,7 @@ def main():
         directors=get_all_directors(),
         categories=get_all_categories(),
         user_taxes=get_all_user_taxes(declarant.name),
-        is_admin=admin_status
+        **user_status
     )
 
 
@@ -40,12 +47,13 @@ def main():
 @login_required
 def admin():
     declarant = current_user
-    admin_status = declarant.admin_status
-    if admin_status == '+':
+    user_status = get_user_status(declarant)
+    if user_status['is_admin']:
         return render_template(
             "admin.html",
             declarant=declarant.name,
-            daily_user_budget = get_declarants_balances()
+            daily_user_budget = get_declarants_balances(),
+            **user_status
         )
     flash('Ви повинні бути адміністратором')
     return redirect(url_for('main.main'))
@@ -55,9 +63,12 @@ def admin():
 @main_routes.route('/director')
 @login_required
 def director():
-    director = current_user
-    director_status = director.director_status
-    if director_status == '+':
+    declarant = current_user
+    user_status = get_user_status(declarant)
+    if user_status['is_director']:
         return render_template(
-            "director.html"
+            "director.html",
+            **user_status
         )
+    flash('Ви повинні бути керівником')
+    return redirect(url_for('main.main'))

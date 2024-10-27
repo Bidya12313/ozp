@@ -6,6 +6,9 @@
         {% if is_admin %}
             <a href="/admin">Адмін</a>
         {% endif %}
+        {% if is_director %}
+            <a href="/director">Для керівника</a>
+        {% endif %}
     </div>
     <div class="navbar-right">
         <a href="/logout" class="nav-link">Вихід</a>
