@@ -21,8 +21,10 @@
             <button type="submit" class="button">Надіслати залишок 🚀</button>
         </form>
 
-        <div class="form-header">Обнулення ліміту</div>
-        <button class="button">Обнулити всі ліміти</button>
+        <form method="POST" action="/reset_all_limits">
+            <div class="form-header">Обнулення ліміту</div>
+            <button type="submit" class="button">Обнулити всі ліміти</button>
+        </form>
 
         <table id="idbudgetTable">
             <thead>
@@ -41,17 +43,17 @@
             </tbody>
         </table>
 
-        <div class="input-container">
-            <label for="applicant">Заявник:</label>
-            <input type="text" id="applicant" name="applicant" placeholder="Заявник" readonly required>
-        </div>
-
-        <button class="button">Обнулити ліміт</button>
+        <form method="POST" action="/reset_user_limit">
+            <div class="input-container">
+                <label for="applicant">Заявник:</label>
+                <input type="text" id="applicant" name="declarant" placeholder="Заявник" readonly required>
+            </div>
+            <button class="button">Обнулити ліміт</button>
+        </form>
     </div>
     
     <!-- Script for select row and plug in forms in table -->
     <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    
     {% endblock %}
 </body>
 </html>

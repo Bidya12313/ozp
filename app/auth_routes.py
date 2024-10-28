@@ -24,7 +24,7 @@ def procces_login():
         if user and int(form.password.data) == int(user.password):
             login_user(user)
             return redirect(url_for("main.main"))
-        flash("Не правильне ім'я або пароль")
+        flash("Не правильне ім'я або пароль", 'danger')
         return redirect(url_for("auth.login"))
     
 
