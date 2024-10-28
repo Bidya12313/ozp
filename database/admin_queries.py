@@ -1,11 +1,11 @@
 from sqlalchemy import select, insert
 
 from .engine import session_factory
-from .budget_models import DailyBudget
+from .budget_models import DailyBudget, GeneralBudget
 
 
-def get_declarants_balances():
+def insert_general_budget(budget):
     with session_factory() as session:
-        query = select(DailyBudget)
-        result = session.execute(query).scalars().all()
-    return result
+        query = GeneralBudget(budget=budget)
+        session.add(query)
+        session.commit()

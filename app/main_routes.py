@@ -6,11 +6,16 @@ from database.queries import (
     get_all_payers,
     get_all_categories,
     get_all_directors,
-    get_all_user_taxes
+    get_all_user_taxes,
+    get_declarants_balances,
 )
 
-from database.admin_queries import (
-    get_declarants_balances
+# from database.admin_queries import (
+#     get_declarants_balances
+# )
+
+from database.director_queries import (
+    get_general_budget
 )
 
 
@@ -69,6 +74,7 @@ def director():
         return render_template(
             "director.html",
             declarant=declarant.name,
+            general_budget = get_general_budget(),
             daily_user_budget = get_declarants_balances(),
             **user_status
         )

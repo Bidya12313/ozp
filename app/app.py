@@ -3,6 +3,7 @@ from flask_login import LoginManager, login_user, login_required, current_user
 
 from .main_routes import main_routes
 from .auth_routes import auth_routes
+from .admin_routes import admin_routes
 
 from database.queries import get_user
 
@@ -21,6 +22,7 @@ def load_user(user_id):
 
 app.register_blueprint(main_routes)
 app.register_blueprint(auth_routes)
+app.register_blueprint(admin_routes)
 
 
 if __name__ == "__main__":

@@ -1,4 +1,4 @@
-from sqlalchemy import select, insert
+from sqlalchemy import select, insert, desc
 
 from .engine import session_factory
 from .models import Base, Users, Payers, Categories, Banks
@@ -84,3 +84,10 @@ def get_all_user_taxes(declarant):
         result = session.execute(query)
         user_taxes = result.scalars().all()
     return user_taxes
+
+
+def get_declarants_balances():
+    with session_factory() as session:
+        query = select(DailyBudget)
+        result = session.execute(query).scalars().all()
+    return result

@@ -14,9 +14,12 @@
 
     {% block body %}
     <div class="form-container">
+        {% include 'flash_messages.html' %}
         <div class="form-header">Залишок в системі</div>
-        <input type="text" id="limit">
-        <button class="button">Надіслати залишок 🚀</button>
+        <form method="POST" action="/set_budget">
+            <input type="number" id="limit" name="general_budget" required step="0.01">
+            <button type="submit" class="button">Надіслати залишок 🚀</button>
+        </form>
 
         <div class="form-header">Обнулення ліміту</div>
         <button class="button">Обнулити всі ліміти</button>
@@ -40,7 +43,7 @@
 
         <div class="input-container">
             <label for="applicant">Заявник:</label>
-            <input type="text" id="applicant" name="applicant" placeholder="Заявник" readonly>
+            <input type="text" id="applicant" name="applicant" placeholder="Заявник" readonly required>
         </div>
 
         <button class="button">Обнулити ліміт</button>

@@ -15,7 +15,8 @@
     {% block body %}
     <div class="form-container">
         <div class="form-header">Залишок в системі</div>
-        <input type="text" id="limit">
+        {% set formatted_budget = '{:,.2f}'.format(general_budget) %}
+        <input type="text" id="limit" value="{{formatted_budget}}" readonly>
         <table id="idbudgetTable">
             <thead>
                 <tr>
@@ -35,12 +36,12 @@
 
         <div class="input-container">
             <label for="applicant">Заявник:</label>
-            <input type="text" id="applicant" name="applicant" placeholder="Заявник" readonly>
+            <input type="text" id="applicant" name="applicant" placeholder="Заявник" readonly required step="0.01">
             <label for="budget">Бюджет:</label>
-            <input type="number" id="budget" name="budget" placeholder="Бюджет">
+            <input type="number" id="budget" name="budget" placeholder="Бюджет" required step="0.01">
         </div>
 
-        <button class="button">Обнулити ліміт</button>
+        <button class="button">Змінити бюджет</button>
     </div>
     
     <!-- Script for select row and plug in forms in table -->
@@ -50,6 +51,7 @@
         <h3>Заявки</h3>
         <div id="requests-list">
             <div class="request-card">
+                <p><strong>Тип:</strong> Заявка на оплату</p>
                 <p><strong>Кому:</strong> Богдан</p>
                 <p><strong>Відповідальний:</strong> Гена</p>
                 <p><strong>Платник:</strong> Я</p>
@@ -64,13 +66,10 @@
             </div>
             
             <div class="request-card">
+                <p><strong>Тип:</strong> Зміна ліміту </p>
                 <p><strong>Кому:</strong> Олександр</p>
-                <p><strong>Відповідальний:</strong> Петро</p>
-                <p><strong>Платник:</strong> Компанія</p>
-                <p><strong>Отримувач:</strong> ABC123</p>
-                <p><strong>Сума:</strong> 15,000.0</p>
-                <p><strong>Категорія:</strong> Легковий</p>
-                <p><strong>Комент:</strong> Оплата послуг</p>
+                <p><strong>Поточний ліміт:</strong> 25000.25</p>
+                <p><strong>Бажаний ліміт:</strong> 15000</p>
                 <div class="button-container">
                     <button class="approve-btn">✔️</button>
                     <button class="reject-btn">❌</button>
