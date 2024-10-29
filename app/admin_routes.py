@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, flash, redirect, url_for, request
-from flask_login import login_required, current_user
+from flask import Blueprint, flash, redirect, url_for, request
+from flask_login import login_required
 
 from database.admin_queries import (
     insert_general_budget,

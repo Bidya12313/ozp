@@ -13,6 +13,7 @@
     {% include 'header.html' %}
 
     {% block body %}
+    {% include 'flash_messages.html' %}
     <div class="form-container">
         <div class="form-header">Залишок в системі</div>
         {% set formatted_budget = '{:,.2f}'.format(general_budget) %}
@@ -34,14 +35,16 @@
             </tbody>
         </table>
 
-        <div class="input-container">
-            <label for="applicant">Заявник:</label>
-            <input type="text" id="applicant" name="applicant" placeholder="Заявник" readonly required step="0.01">
-            <label for="budget">Бюджет:</label>
-            <input type="number" id="budget" name="budget" placeholder="Бюджет" required step="0.01">
-        </div>
+        <form method="POST" action="/change_budget">
+            <div class="input-container">
+                <label for="applicant">Заявник:</label>
+                <input type="text" id="applicant" name="declarant" placeholder="Заявник" readonly required step="0.01">
+                <label for="budget">Бюджет:</label>
+                <input type="number" id="budget" name="required_budget" placeholder="Бюджет" required step="0.01">
+            </div>
 
-        <button class="button">Змінити бюджет</button>
+            <button type="submit" class="button">Змінити бюджет</button>
+        </form>
     </div>
     
     <!-- Script for select row and plug in forms in table -->
