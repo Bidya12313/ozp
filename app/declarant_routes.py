@@ -6,7 +6,7 @@ from database.declarant_queries import(
 )
 
 from database.admin_queries import(
-    reset_user_limit,
+    reset_user_budget,
 )
 
 manager_routes = Blueprint('manager', __name__)
@@ -37,7 +37,7 @@ def create_tax_route():
 def reset_limit():
     declarant = current_user.name
     try:
-        reset_user_limit(declarant)
+        reset_user_budget(declarant)
         flash(f'Ліміт обнулено!', 'success')
     except:
         flash(f'Помилка! Ліміт не обнулено!', 'danger')

@@ -2,14 +2,7 @@ from sqlalchemy import select, insert, desc, update
 
 from .engine import session_factory
 from .budget_models import GeneralBudget, DailyBudget
-
-
-def get_general_budget():
-    with session_factory() as session:
-        query = select(GeneralBudget.budget).order_by(desc(GeneralBudget.id))
-        result = session.execute(query)
-        general_budget = result.scalars().first()
-    return general_budget
+from .queries import get_general_budget
 
 
 def change_user_budget(declarant, required_budget):

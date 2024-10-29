@@ -3,8 +3,8 @@ from flask_login import login_required
 
 from database.admin_queries import (
     insert_general_budget,
-    reset_all_limits,
-    reset_user_limit,
+    reset_all_budget,
+    reset_user_budget,
 )
 
 admin_routes = Blueprint('admin', __name__)
@@ -28,7 +28,7 @@ def set_general_budget():
 @login_required
 def reset_page_all_limits():
     try:
-        reset_all_limits()
+        reset_all_budget()
         flash('Ліміти обнулено!', 'success')
     except:
         flash('Помилка! Ліміти не обнулено', 'danger')
@@ -40,7 +40,7 @@ def reset_page_all_limits():
 def reset_page_user_limit():
     declarant = request.form.get('declarant')
     try:
-        reset_user_limit(declarant)
+        reset_user_budget(declarant)
         flash(f'Ліміт {declarant} обнулено!', 'success')
     except:
         flash(f'Помилка! Ліміт {declarant} не обнулено!', 'danger')

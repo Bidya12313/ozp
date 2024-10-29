@@ -91,3 +91,11 @@ def get_declarants_balances():
         query = select(DailyBudget)
         result = session.execute(query).scalars().all()
     return result
+
+
+def get_general_budget():
+    with session_factory() as session:
+        query = select(GeneralBudget.budget).order_by(desc(GeneralBudget.id))
+        result = session.execute(query)
+        general_budget = result.scalars().first()
+    return general_budget
