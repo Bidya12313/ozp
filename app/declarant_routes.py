@@ -1,10 +1,13 @@
 from flask import Blueprint, flash, redirect, url_for, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from database.declarant_queries import(
     create_tax,
 )
 
+from database.admin_queries import(
+    reset_user_limit,
+)
 
 manager_routes = Blueprint('manager', __name__)
 
@@ -26,4 +29,16 @@ def create_tax_route():
         flash('Заявка успішно створена!', 'success')
     except:
         flash('Помилка! Не можливо створити заявку!')
+    return redirect(url_for('main.main'))
+
+
+@manager_routes.route('/reset_limit', methods=['POST'])
+@login_required
+def reset_limit():
+    declarant = current_user.name
+    try:
+        reset_user_limit(declarant)
+        flash(f'Ліміт обнулено!', 'success')
+    except:
+        flash(f'Помилка! Ліміт не обнулено!', 'danger')
     return redirect(url_for('main.main'))
