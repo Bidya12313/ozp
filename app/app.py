@@ -5,6 +5,7 @@ from .main_routes import main_routes
 from .auth_routes import auth_routes
 from .admin_routes import admin_routes
 from .director_routes import director_routes
+from .declarant_routes import manager_routes
 
 from database.queries import get_user
 
@@ -25,6 +26,7 @@ app.register_blueprint(main_routes)
 app.register_blueprint(auth_routes)
 app.register_blueprint(admin_routes)
 app.register_blueprint(director_routes)
+app.register_blueprint(manager_routes)
 
 
 if __name__ == "__main__":

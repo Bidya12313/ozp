@@ -80,7 +80,7 @@ def get_user(user_id: int):
 
 def get_all_user_taxes(declarant):
     with session_factory() as session:
-        query = select(Taxes).filter(Taxes.declarant==declarant)
+        query = select(Taxes).filter(Taxes.declarant==declarant).order_by(Taxes.id.desc())
         result = session.execute(query)
         user_taxes = result.scalars().all()
     return user_taxes

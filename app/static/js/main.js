@@ -20,13 +20,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const cells = rows[i].getElementsByTagName('td');
 
                 // Заповнюємо відповідні поля форм
-                document.getElementById('applicant').value = cells[0].innerText; // Заявник
-                document.getElementById('payer').value = cells[1].innerText; // Платник
-                document.getElementById('manager').value = cells[2].innerText; // Керівник
-                document.getElementById('recipient').value = cells[3].innerText; // Отримувач
-                document.getElementById('amount').value = cells[4].innerText; // Сума
-                document.getElementById('category').value = cells[5].innerText; // Категорія
-                document.getElementById('comment').value = cells[7].innerText; // Коментар
+                document.getElementById('applicant').value = cells[2].innerText; // Заявник
+                document.getElementById('payer').value = cells[3].innerText; // Платник
+                document.getElementById('manager').value = cells[4].innerText; // Керівник
+                document.getElementById('recipient').value = cells[5].innerText; // Отримувач
+                document.getElementById('amount').value = cells[6].innerText; // Сума
+                document.getElementById('category').value = cells[7].innerText; // Категорія
+                document.getElementById('comment').value = cells[9].innerText; // Коментар
             });
         }
     }
