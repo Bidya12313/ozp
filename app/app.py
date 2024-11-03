@@ -15,6 +15,7 @@ app.config["SECRET_KEY"] = "Ignds eefsdfndsofihihdi f23"
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "auth.login"
+login_manager.login_message = None
 
 
 @login_manager.user_loader
