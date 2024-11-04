@@ -53,40 +53,29 @@
     <div class="requests-container">
         <h3>Заявки</h3>
         <div id="requests-list">
+            {% for tax in taxes %}
             <div class="request-card">
-                <p><strong>Тип:</strong> Заявка на оплату</p>
-                <p><strong>Кому:</strong> Богдан</p>
-                <p><strong>Відповідальний:</strong> Гена</p>
-                <p><strong>Платник:</strong> Я</p>
-                <p><strong>Отримувач:</strong> 32wws</p>
-                <p><strong>Сума:</strong> 33,999.0</p>
-                <p><strong>Категорія:</strong> Грузовик</p>
-                <p><strong>Комент:</strong> dddfdfvdf</p>
+                <p><strong>Тип:</strong> {{tax.typetx}}</p>
+                <p><strong>Час створення:</strong> {{tax.time}}</p>
+                <p><strong>Заявник:</strong> {{tax.declarant}}</p>
+                <p><strong>Платник:</strong> {{tax.payer}}</p>
+                <p><strong>Керівник:</strong> {{tax.director}}</p>
+                <p><strong>Отримувач:</strong> {{tax.recipient}}</p>
+                <p><strong>Сума:</strong> {{tax.amount}}</p>
+                <p><strong>Категорія:</strong> {{tax.category}}</p>
+                <p><strong>Документ:</strong> {{tax.document}}</p>
+                <p><strong>Комент:</strong> {{tax.comment}}</p>
                 <div class="button-container">
                     <button class="approve-btn">✔️</button>
                     <button class="reject-btn">❌</button>
                 </div>
             </div>
-            
+            {% endfor %}
             <div class="request-card">
                 <p><strong>Тип:</strong> Зміна ліміту </p>
                 <p><strong>Кому:</strong> Олександр</p>
                 <p><strong>Поточний ліміт:</strong> 25000.25</p>
                 <p><strong>Бажаний ліміт:</strong> 15000</p>
-                <div class="button-container">
-                    <button class="approve-btn">✔️</button>
-                    <button class="reject-btn">❌</button>
-                </div>
-            </div>
-            
-            <div class="request-card">
-                <p><strong>Кому:</strong> Марія</p>
-                <p><strong>Відповідальний:</strong> Іван</p>
-                <p><strong>Платник:</strong> Замовник</p>
-                <p><strong>Отримувач:</strong> ZXY456</p>
-                <p><strong>Сума:</strong> 10,500.0</p>
-                <p><strong>Категорія:</strong> Послуги</p>
-                <p><strong>Комент:</strong> Ремонт обладнання</p>
                 <div class="button-container">
                     <button class="approve-btn">✔️</button>
                     <button class="reject-btn">❌</button>

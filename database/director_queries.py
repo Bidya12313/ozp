@@ -2,6 +2,7 @@ from sqlalchemy import select, insert, desc, update
 
 from .engine import session_factory
 from .budget_models import GeneralBudget, DailyBudget
+from .system_models import Taxes
 from .queries import get_general_budget
 
 
@@ -23,3 +24,10 @@ def change_user_budget(declarant, required_budget):
         
         session.commit()
 
+
+def get_requested_taxes():
+    with session_factory() as session:
+        get_taxes = select(Taxes).filter(Taxes.status=='Надіслано')
+        result = session.execute(get_taxes)
+        taxes = result.scalars().all()
+    return taxes

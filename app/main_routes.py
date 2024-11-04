@@ -10,12 +10,9 @@ from database.queries import (
     get_declarants_balances,
 )
 
-# from database.admin_queries import (
-#     get_declarants_balances
-# )
-
 from database.director_queries import (
-    get_general_budget
+    get_general_budget,
+    get_requested_taxes,
 )
 
 
@@ -76,6 +73,7 @@ def director():
             declarant=declarant.name,
             general_budget = get_general_budget(),
             daily_user_budget = get_declarants_balances(),
+            taxes = get_requested_taxes(),
             **user_status
         )
     flash('Ви повинні бути керівником')
