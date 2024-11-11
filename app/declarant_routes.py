@@ -1,3 +1,5 @@
+from errors import BudgetExceededError
+
 from flask import Blueprint, flash, redirect, url_for, request
 from flask_login import login_required, current_user
 
@@ -27,6 +29,8 @@ def create_tax_route():
     try:
         create_tax(declarant, payer, director, recipient, category, amount, document, comment)
         flash('Заявка успішно створена!', 'success')
+    except BudgetExceededError:
+        flash('Не достатньо коштів на балансі!', 'danger')
     except:
         flash('Помилка! Не можливо створити заявку!')
     return redirect(url_for('main.main'))

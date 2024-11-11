@@ -99,3 +99,11 @@ def get_general_budget():
         result = session.execute(query)
         general_budget = result.scalars().first()
     return general_budget
+
+
+def get_declarant_budget(declarant):
+    with session_factory() as session:
+        get_current_user_budget = select(DailyBudget.budget).filter(DailyBudget.declarant==declarant)
+        result = session.execute(get_current_user_budget)
+        current_user_budget = result.scalars().first()
+    return current_user_budget

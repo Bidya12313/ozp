@@ -3,16 +3,21 @@ from sqlalchemy import select, insert, desc, update
 from .engine import session_factory
 from .budget_models import GeneralBudget, DailyBudget
 from .system_models import Taxes
-from .queries import get_general_budget
+from .queries import get_general_budget, get_declarant_budget
+
+from errors import BudgetExceededError
 
 
 def change_user_budget(declarant, required_budget):
     with session_factory() as session:
-        get_current_user_budget = select(DailyBudget.budget).filter(DailyBudget.declarant==declarant)
-        result = session.execute(get_current_user_budget)
-        current_user_budget = result.scalars().first()
+        current_user_budget = get_declarant_budget(declarant)
         general_budget = get_general_budget()
 
+        available_budget = general_budget + current_user_budget
+
+        if float(required_budget) > float(available_budget):
+            raise BudgetExceededError
+        
         general_budget += current_user_budget
         general_budget -= float(required_budget)
         

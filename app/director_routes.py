@@ -4,6 +4,8 @@ from flask_login import login_required
 from database.director_queries import (
     change_user_budget,
 )
+from errors import BudgetExceededError
+
 
 director_routes = Blueprint('director', __name__)
 
@@ -16,7 +18,9 @@ def change_budget():
     try:
         change_user_budget(declarant=declarant, required_budget=required_budget)
         flash(f'Заявнику {declarant} змінено бюджет!', 'success')
-    except:
+    except BudgetExceededError:
+        flash('Запитуваний бюджет перевищує загальний бюджет!', 'danger')
+    except Exception:
         flash('Не вдалося змінити ліміт!', 'danger')
     return redirect(url_for('main.director'))
 
