@@ -77,7 +77,8 @@ def cancel_tax(tax_id: int):
             tax.status = 'Відхилено'
 
             current_user_budget = get_declarant_budget(tax.declarant)
-            user_budget_query = update(DailyBudget).values(budget=tax.amount).filter(DailyBudget.declarant==tax.declarant)
+            current_user_budget += tax.amount
+            user_budget_query = update(DailyBudget).values(budget=current_user_budget).filter(DailyBudget.declarant==tax.declarant)
             session.execute(user_budget_query)
 
             current_user_budget += tax.amount
