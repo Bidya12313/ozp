@@ -3,6 +3,8 @@ from flask_login import login_required
 
 from database.director_queries import (
     change_user_budget,
+    confirm_tax,
+    cancel_tax,
 )
 from errors import BudgetExceededError
 
@@ -23,5 +25,34 @@ def change_budget():
     except Exception:
         flash('Не вдалося змінити ліміт!', 'danger')
     return redirect(url_for('main.director'))
+
+
+@director_routes.route('/approve_tax', methods=['POST'])
+@login_required
+def approve_tax():
+    tax_id = request.form.get('request_id')
+    try:
+        confirm_tax(tax_id)
+        flash(f'Заявка підтверджена!', 'success')
+    except BudgetExceededError:
+        flash('Запитуваний бюджет перевищує загальний бюджет!', 'danger')
+    except Exception:
+        flash('Не вдалося змінити ліміт!', 'danger')
+    return redirect(url_for('main.director'))
+
+
+@director_routes.route('/reject_tax', methods=['POST'])
+@login_required
+def reject_tax():
+    tax_id = request.form.get('request_id')
+    try:
+        cancel_tax(tax_id)
+        flash('Заявка відхилена!', 'success')
+    except BudgetExceededError:
+        flash('Запитуваний бюджет перевищує загальний бюджет!', 'danger')
+    except Exception:
+        flash('Не вдалося змінити ліміт!', 'danger')
+    return redirect(url_for('main.director'))
+
 
 

@@ -38,7 +38,7 @@
         <form method="POST" action="/change_budget">
             <div class="input-container">
                 <label for="applicant">Заявник:</label>
-                <input type="text" id="applicant" name="declarant" placeholder="Заявник" readonly required step="0.01">
+                <input type="text" id="applicant" name="declarant" placeholder="Заявник" readonly required>
                 <label for="budget">Бюджет:</label>
                 <input type="number" id="budget" name="required_budget" placeholder="Бюджет" required step="0.01">
             </div>
@@ -54,38 +54,39 @@
         <h3>Заявки</h3>
         <div id="requests-list">
             {% for tax in taxes %}
-            <div class="request-card">
-                <p><strong>Тип:</strong> {{tax.typetx}}</p>
-                <p><strong>Час створення:</strong> {{tax.time}}</p>
-                <p><strong>Заявник:</strong> {{tax.declarant}}</p>
-                <p><strong>Платник:</strong> {{tax.payer}}</p>
-                <p><strong>Керівник:</strong> {{tax.director}}</p>
-                <p><strong>Отримувач:</strong> {{tax.recipient}}</p>
-                <p><strong>Сума:</strong> {{tax.amount}}</p>
-                <p><strong>Категорія:</strong> {{tax.category}}</p>
-                <p><strong>Документ:</strong> {{tax.document}}</p>
-                <p><strong>Комент:</strong> {{tax.comment}}</p>
-                <div class="button-container">
-                    <button class="approve-btn">✔️</button>
-                    <button class="reject-btn">❌</button>
+                {% if tax.typetx == 'На оплату' %}
+                <div class="request-card">
+                    <p><strong>Тип:</strong> {{tax.typetx}}</p>
+                    <p><strong>Час створення:</strong> {{tax.time}}</p>
+                    <p><strong>Заявник:</strong> {{tax.declarant}}</p>
+                    <p><strong>Платник:</strong> {{tax.payer}}</p>
+                    <p><strong>Керівник:</strong> {{tax.director}}</p>
+                    <p><strong>Отримувач:</strong> {{tax.recipient}}</p>
+                    <p><strong>Сума:</strong> {{tax.amount}}</p>
+                    <p><strong>Категорія:</strong> {{tax.category}}</p>
+                    <p><strong>Документ:</strong> {{tax.document}}</p>
+                    <p><strong>Комент:</strong> {{tax.comment}}</p>
+                {% elif tax.typetx == 'Зміна ліміту' %}
+                <div class="request-card">
+                    <p><strong>Тип:</strong> Зміна ліміту</p>
+                    <p><strong>Час створення:</strong> {{tax.time}}</p>
+                    <p><strong>Кому:</strong> {{tax.declarant}}</p>
+                    <p><strong>Бажаний ліміт:</strong> {{tax.amount}}</p>
+                {% endif %}
+                    <div class="button-container">
+                        <form method="POST" action="/approve_tax">
+                            <input type="hidden" name="request_id" value="{{ tax.id }}">
+                            <button type="submit" class="approve-btn">✔️</button>
+                        </form>
+                        <form method="POST" action="/reject_tax">
+                            <input type="hidden" name="request_id" value="{{ tax.id }}">
+                            <button type="submit" class="reject-btn">❌</button>
+                        </form>
+                    </div>
                 </div>
-            </div>
             {% endfor %}
-            <div class="request-card">
-                <p><strong>Тип:</strong> Зміна ліміту </p>
-                <p><strong>Кому:</strong> Олександр</p>
-                <p><strong>Поточний ліміт:</strong> 25000.25</p>
-                <p><strong>Бажаний ліміт:</strong> 15000</p>
-                <div class="button-container">
-                    <button class="approve-btn">✔️</button>
-                    <button class="reject-btn">❌</button>
-                </div>
-            </div>
         </div>
     </div>
-    
-
-    
     {% endblock %}
 </body>
 </html>

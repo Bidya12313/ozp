@@ -37,3 +37,21 @@ def create_tax(declarant: str, payer: str, director: str, recipient: str, catego
         )
         session.add(query)
         session.commit()
+
+
+def change_limit_request(declarant: str, new_limit: float):
+    with session_factory() as session:
+        query = Taxes(
+            typetx='Зміна ліміту',
+            declarant=declarant,
+            payer='-',
+            director='-',
+            recipient='-',
+            amount=new_limit,
+            category='-',
+            document='-',
+            comment='-',
+            status='Надіслано'
+        )
+        session.add(query)
+        session.commit()

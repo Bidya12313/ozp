@@ -5,6 +5,7 @@ from flask_login import login_required, current_user
 
 from database.declarant_queries import(
     create_tax,
+    change_limit_request,
 )
 
 from database.admin_queries import(
@@ -32,7 +33,7 @@ def create_tax_route():
     except BudgetExceededError:
         flash('Не достатньо коштів на балансі!', 'danger')
     except:
-        flash('Помилка! Не можливо створити заявку!')
+        flash('Помилка! Не можливо створити заявку!', 'danger')
     return redirect(url_for('main.main'))
 
 
@@ -45,4 +46,17 @@ def reset_limit():
         flash(f'Ліміт обнулено!', 'success')
     except:
         flash(f'Помилка! Ліміт не обнулено!', 'danger')
+    return redirect(url_for('main.main'))
+
+
+@manager_routes.route('/change_limit', methods=['POST'])
+@login_required
+def change_limit():
+    declarant = current_user.name
+    new_limit = request.form.get('new_limit')
+    try:
+        change_limit_request(declarant, new_limit)
+        flash(f'Заявку на зміну ліміту успішно надіслано!', 'success')
+    except:
+        flash(f'Помилка! Заявку на зміну ліміту не надіслано!', 'danger')
     return redirect(url_for('main.main'))
