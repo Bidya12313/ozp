@@ -3,7 +3,7 @@ from sqlalchemy import select, insert, desc, update
 from .engine import session_factory
 from .budget_models import GeneralBudget, DailyBudget
 from .system_models import Taxes
-from .queries import get_general_budget, get_declarant_budget
+from .queries import get_general_budget, get_declarant_budget, get_tax
 
 from errors import BudgetExceededError
 
@@ -36,13 +36,6 @@ def get_requested_taxes(status):
         result = session.execute(get_taxes)
         taxes = result.scalars().all()
     return taxes
-
-
-def get_tax(tax_id: int, session):
-    get_tax = select(Taxes).filter(Taxes.id==tax_id)
-    result = session.execute(get_tax)
-    tax = result.scalar_one()
-    return tax
 
 
 def confirm_tax(tax_id: int):

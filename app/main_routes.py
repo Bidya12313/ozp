@@ -8,6 +8,7 @@ from database.queries import (
     get_all_directors,
     get_all_user_taxes,
     get_declarants_balances,
+    get_all_banks,
 )
 
 from database.director_queries import (
@@ -91,6 +92,8 @@ def bank_operator():
         return render_template(
             "operator.html",
             declarant=operator.name,
+            banks = get_all_banks(),
+            bank_taxes = get_requested_taxes('Банк'),
             taxes = get_requested_taxes('На оплаті'),
             **user_status,
         )

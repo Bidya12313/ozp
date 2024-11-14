@@ -22,7 +22,7 @@ def get_all_declarants():
     return declarants
 
 
-def get_all_payers():
+def get_all_banks():
     with session_factory() as session:
         query = select(Banks.bank)
         result = session.execute(query)
@@ -107,3 +107,10 @@ def get_declarant_budget(declarant):
         result = session.execute(get_current_user_budget)
         current_user_budget = result.scalars().first()
     return current_user_budget
+
+
+def get_tax(tax_id: int, session):
+    get_tax = select(Taxes).filter(Taxes.id==tax_id)
+    result = session.execute(get_tax)
+    tax = result.scalar_one()
+    return tax

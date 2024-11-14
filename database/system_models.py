@@ -21,3 +21,4 @@ class Taxes(Base):
     comment: Mapped[Optional[str]] = mapped_column(nullable=True)
     time: Mapped[datetime] = mapped_column(default=lambda: datetime.now().replace(microsecond=0))
     status: Mapped[Optional[str]] = mapped_column()
+    bank: Mapped[Optional[str]] = mapped_column()

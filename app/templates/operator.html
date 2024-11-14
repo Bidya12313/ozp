@@ -12,6 +12,29 @@
     {% include 'header.html' %}
     {% include 'flash_messages.html' %}
     <div class="requests-container">
+        <h3>Заявки(Оплата)</h3>
+        <div id="requests-list">
+            {% for tax in bank_taxes %}
+                <div class="request-card">
+                    <p><strong>Тип:</strong> {{tax.typetx}}</p>
+                    <p><strong>Час створення:</strong> {{tax.time}}</p>
+                    <p><strong>Заявник:</strong> {{tax.declarant}}</p>
+                    <p><strong>Платник:</strong> {{tax.payer}}</p>
+                    <p><strong>Керівник:</strong> {{tax.director}}</p>
+                    <p><strong>Отримувач:</strong> {{tax.recipient}}</p>
+                    <p><strong>Сума:</strong> {{tax.amount}}</p>
+                    <p><strong>Категорія:</strong> {{tax.category}}</p>
+                    <p><strong>Документ:</strong> {{tax.document}}</p>
+                    <p><strong>Комент:</strong> {{tax.comment}}</p>
+                    <h5><strong>Банк: {{tax.bank}}</h5></strong>
+                    <div class="button-container">
+                        <form method="POST" action="/pay">
+                            <input type="hidden" name="request_id" value="{{ tax.id }}">
+                            <button type="submit" class="approve-btn">Оплачено</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
         <h3>Заявки</h3>
         <div id="requests-list">
             {% for tax in taxes %}
@@ -26,16 +49,20 @@
                     <p><strong>Категорія:</strong> {{tax.category}}</p>
                     <p><strong>Документ:</strong> {{tax.document}}</p>
                     <p><strong>Комент:</strong> {{tax.comment}}</p>
-                    <div class="button-container">
-                        <form method="POST" action="/approve_tax">
+                    <form method="POST" action="/choose_bank">
+                        <div class="form-group">
+                            <label for="cbank">Оберіть банк:</label>
+                            <select id="bank" name="bank" required>
+                                {%for bank in banks%}
+                                <option>{{bank}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                        <div class="button-container">
                             <input type="hidden" name="request_id" value="{{ tax.id }}">
-                            <button type="submit" class="approve-btn">✔️</button>
-                        </form>
-                        <form method="POST" action="/reject_tax">
-                            <input type="hidden" name="request_id" value="{{ tax.id }}">
-                            <button type="submit" class="reject-btn">❌</button>
-                        </form>
-                    </div>
+                            <button type="submit" class="button">Обрати банк</button>
+                        </div>
+                    </form>
                 </div>
             {% endfor %}
         </div>
