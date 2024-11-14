@@ -30,9 +30,9 @@ def change_user_budget(declarant, required_budget):
         session.commit()
 
 
-def get_requested_taxes():
+def get_requested_taxes(status):
     with session_factory() as session:
-        get_taxes = select(Taxes).filter(Taxes.status=='Надіслано')
+        get_taxes = select(Taxes).filter(Taxes.status==status)
         result = session.execute(get_taxes)
         taxes = result.scalars().all()
     return taxes

@@ -21,6 +21,7 @@ main_routes = Blueprint('main', __name__)
 
 def get_user_status(user):
     return {
+        'is_operator': user.operator_status,
         'is_admin': user.admin_status == '+',
         'is_director': user.director_status == '+'
     }
@@ -73,8 +74,25 @@ def director():
             declarant=declarant.name,
             general_budget = get_general_budget(),
             daily_user_budget = get_declarants_balances(),
-            taxes = get_requested_taxes(),
+            taxes = get_requested_taxes('Надіслано'),
             **user_status
         )
     flash('Ви повинні бути керівником')
+    return redirect(url_for('main.main'))
+
+
+# bank operator page
+@main_routes.route('/operator')
+@login_required
+def bank_operator():
+    operator = current_user
+    user_status = get_user_status(operator)
+    if user_status['is_operator']:
+        return render_template(
+            "operator.html",
+            declarant=operator.name,
+            taxes = get_requested_taxes('На оплаті'),
+            **user_status,
+        )
+    flash('Ви повинні бути оператором')
     return redirect(url_for('main.main'))

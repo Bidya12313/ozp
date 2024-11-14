@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для керівника</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <!-- navbar -->
+    {% include 'header.html' %}
+    {% include 'flash_messages.html' %}
+    <div class="requests-container">
+        <h3>Заявки</h3>
+        <div id="requests-list">
+            {% for tax in taxes %}
+                <div class="request-card">
+                    <p><strong>Тип:</strong> {{tax.typetx}}</p>
+                    <p><strong>Час створення:</strong> {{tax.time}}</p>
+                    <p><strong>Заявник:</strong> {{tax.declarant}}</p>
+                    <p><strong>Платник:</strong> {{tax.payer}}</p>
+                    <p><strong>Керівник:</strong> {{tax.director}}</p>
+                    <p><strong>Отримувач:</strong> {{tax.recipient}}</p>
+                    <p><strong>Сума:</strong> {{tax.amount}}</p>
+                    <p><strong>Категорія:</strong> {{tax.category}}</p>
+                    <p><strong>Документ:</strong> {{tax.document}}</p>
+                    <p><strong>Комент:</strong> {{tax.comment}}</p>
+                    <div class="button-container">
+                        <form method="POST" action="/approve_tax">
+                            <input type="hidden" name="request_id" value="{{ tax.id }}">
+                            <button type="submit" class="approve-btn">✔️</button>
+                        </form>
+                        <form method="POST" action="/reject_tax">
+                            <input type="hidden" name="request_id" value="{{ tax.id }}">
+                            <button type="submit" class="reject-btn">❌</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>

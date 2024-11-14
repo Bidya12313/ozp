@@ -8,7 +8,7 @@ class Users(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(unique=True)
     password: Mapped[int] = mapped_column()
-    chat_id: Mapped[int] = mapped_column()
+    operator_status: Mapped[str] = mapped_column(nullable=True)
     admin_status: Mapped[str] = mapped_column(nullable=True)
     director_status: Mapped[str] = mapped_column(nullable=True)
 

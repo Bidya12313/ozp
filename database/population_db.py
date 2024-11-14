@@ -5,8 +5,8 @@ from .models import Users
 
 
 def create_table():
-    Base.metadata.drop_all(db_engine, tables=[Taxes.__table__])
-    Base.metadata.create_all(db_engine, tables=[Taxes.__table__])
+    Base.metadata.drop_all(db_engine, tables=[Users.__table__])
+    Base.metadata.create_all(db_engine, tables=[Users.__table__])
 
 
 if __name__ == '__main__':
