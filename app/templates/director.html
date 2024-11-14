@@ -53,6 +53,7 @@
     <div class="requests-container">
         <h3>Заявки</h3>
         <div id="requests-list">
+            {% if taxes %}
             {% for tax in taxes %}
                 {% if tax.typetx == 'На оплату' %}
                 <div class="request-card">
@@ -85,6 +86,9 @@
                     </div>
                 </div>
             {% endfor %}
+            {% else %}
+            <h5 style="text-align: center;">Нові заявки відсутні!</h5>
+            {% endif %}
         </div>
     </div>
     {% endblock %}
