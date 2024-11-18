@@ -1,4 +1,4 @@
-from errors import BudgetExceededError
+from errors import BudgetExceededError, FileNumberError
 from .upload_document import upload_documents
 
 from flask import Blueprint, flash, redirect, url_for, request
@@ -32,6 +32,8 @@ def create_tax_route():
         uploaded_docs = upload_documents(document)
         create_tax(declarant, payer, director, recipient, category, amount, uploaded_docs, comment)
         flash('Заявка успішно створена!', 'success')
+    except FileNumberError:
+        flash('Максимальна кількість файлів 5!', 'danger')
     except BudgetExceededError:
         flash('Не достатньо коштів на балансі!', 'danger')
     except:
