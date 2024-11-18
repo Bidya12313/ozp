@@ -1,4 +1,4 @@
-from sqlalchemy import DateTime
+from sqlalchemy import Numeric
 from sqlalchemy.orm import Mapped, mapped_column
 from typing import Optional
 
@@ -15,7 +15,7 @@ class Taxes(Base):
     payer: Mapped[str] = mapped_column()
     director: Mapped[str] = mapped_column()
     recipient: Mapped[str] = mapped_column()
-    amount: Mapped[float] = mapped_column()
+    amount: Mapped[float] = mapped_column(Numeric(10, 2))
     category: Mapped[str] = mapped_column()
     document: Mapped[Optional[str]] = mapped_column()
     comment: Mapped[Optional[str]] = mapped_column(nullable=True)

@@ -5,11 +5,11 @@ from .models import Users, Payers, Categories, Banks
 
 
 tables = tables=[
-        Users.__table__,
-        Payers.__table__,
-        Categories.__table__,
-        Banks.__table__,
-        Taxes.__table__,
+        # Users.__table__,
+        # Payers.__table__,
+        # Categories.__table__,
+        # Banks.__table__,
+        # Taxes.__table__,
         DailyBudget.__table__,
         GeneralBudget.__table__,
         ]

@@ -16,8 +16,7 @@
     {% include 'flash_messages.html' %}
     <div class="form-container">
         <div class="form-header">Залишок в системі</div>
-        {% set formatted_budget = '{:,.2f}'.format(general_budget) %}
-        <input type="text" id="limit" value="{{formatted_budget}}" readonly>
+        <input type="text" id="limit" value="{{general_budget}}" readonly>
         <table id="idbudgetTable">
             <thead>
                 <tr>

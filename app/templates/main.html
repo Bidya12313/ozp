@@ -23,8 +23,7 @@
             
             <div class="form-group">
                 <label for="limit">Поточний ліміт:</label>
-                {% set formatted_budget = '{:,.2f}'.format(daily_budget) %}
-                <input type="text" id="limit" value="{{formatted_budget}}" readonly>
+                <input type="text" id="limit" value="{{daily_budget}}" readonly>
                 <form method="POST" action="/change_limit" style="display: inline;">
                     <button id="changelimit">Змінити</button>
                 </form>
