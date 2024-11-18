@@ -1,4 +1,5 @@
 from errors import BudgetExceededError
+from .upload_document import upload_documents
 
 from flask import Blueprint, flash, redirect, url_for, request
 from flask_login import login_required, current_user
@@ -24,11 +25,12 @@ def create_tax_route():
     recipient = request.form.get('recipient')
     category = request.form.get('category')
     amount = request.form.get('amount')
-    document = request.form.get('document')
+    document = request.files.getlist('documents')
     comment = request.form.get('comment')
 
     try:
-        create_tax(declarant, payer, director, recipient, category, amount, document, comment)
+        uploaded_docs = upload_documents(document)
+        create_tax(declarant, payer, director, recipient, category, amount, uploaded_docs, comment)
         flash('Заявка успішно створена!', 'success')
     except BudgetExceededError:
         flash('Не достатньо коштів на балансі!', 'danger')

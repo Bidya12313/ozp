@@ -32,7 +32,7 @@
                 </form>
             </div>
 
-            <form method="POST" action="/create_tax">
+            <form method="POST" action="/create_tax" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="applicant">Заявник:</label>
                     <select id="applicant" name="declarant">
@@ -79,7 +79,7 @@
 
                 <div class="form-group">
                     <label for="document">Прикріпіть документ:</label>
-                    <input type="file" id="document" name="document">
+                    <input type="file" id="document" name="documents" multiple accept=".jpg, .png, .pdf, .docx, .xlsm">
                 </div>
 
                 <div class="form-group">
