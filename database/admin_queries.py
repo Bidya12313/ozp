@@ -23,7 +23,7 @@ def reset_user_budget(declarant):
     with session_factory() as session:
         get_current_user_budget = select(DailyBudget.budget).filter(DailyBudget.declarant==declarant)
         result = session.execute(get_current_user_budget)
-        current_user_budget = result.scalars().first()
+        current_user_budget = float(result.scalars().first())
         general_budget = float(get_general_budget())
         general_budget += current_user_budget
         

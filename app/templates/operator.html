@@ -16,17 +16,7 @@
         <div id="requests-list">
             {% if bank_taxes %}
             {% for tax in bank_taxes %}
-                <div class="request-card">
-                    <p><strong>Тип:</strong> {{tax.typetx}}</p>
-                    <p><strong>Час створення:</strong> {{tax.time}}</p>
-                    <p><strong>Заявник:</strong> {{tax.declarant}}</p>
-                    <p><strong>Платник:</strong> {{tax.payer}}</p>
-                    <p><strong>Керівник:</strong> {{tax.director}}</p>
-                    <p><strong>Отримувач:</strong> {{tax.recipient}}</p>
-                    <p><strong>Сума:</strong> {{tax.amount}}</p>
-                    <p><strong>Категорія:</strong> {{tax.category}}</p>
-                    <p><strong>Документ:</strong> {{tax.document}}</p>
-                    <p><strong>Комент:</strong> {{tax.comment}}</p>
+                {% include 'tax_card.html' %}
                     <h5><strong>Банк: {{tax.bank}}</h5></strong>
                     <div class="button-container">
                         <form method="POST" action="/pay">
@@ -44,17 +34,7 @@
         <div id="requests-list">
             {% if taxes %}
             {% for tax in taxes %}
-                <div class="request-card">
-                    <p><strong>Тип:</strong> {{tax.typetx}}</p>
-                    <p><strong>Час створення:</strong> {{tax.time}}</p>
-                    <p><strong>Заявник:</strong> {{tax.declarant}}</p>
-                    <p><strong>Платник:</strong> {{tax.payer}}</p>
-                    <p><strong>Керівник:</strong> {{tax.director}}</p>
-                    <p><strong>Отримувач:</strong> {{tax.recipient}}</p>
-                    <p><strong>Сума:</strong> {{tax.amount}}</p>
-                    <p><strong>Категорія:</strong> {{tax.category}}</p>
-                    <p><strong>Документ:</strong> {{tax.document}}</p>
-                    <p><strong>Комент:</strong> {{tax.comment}}</p>
+                {% include 'tax_card.html' %}
                     <form method="POST" action="/choose_bank">
                         <div class="form-group">
                             <label for="cbank">Оберіть банк:</label>

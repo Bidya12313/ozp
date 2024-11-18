@@ -1,0 +1,28 @@
+<div class="request-card">
+    <p><strong>Тип:</strong> {{tax.typetx}}</p>
+    <p><strong>Час створення:</strong> {{tax.time}}</p>
+    <p><strong>Заявник:</strong> {{tax.declarant}}</p>
+    <p><strong>Платник:</strong> {{tax.payer}}</p>
+    <p><strong>Керівник:</strong> {{tax.director}}</p>
+    <p><strong>Отримувач:</strong> {{tax.recipient}}</p>
+    <p><strong>Сума:</strong> {{tax.amount}}</p>
+    <p><strong>Категорія:</strong> {{tax.category}}</p>
+    <p><strong>Документ:</strong>
+    {% if tax.document %}
+        <ul>
+            {% for doc in tax.document.split(', ') %}
+                <li>
+                    {% set ext = doc.split('.') %}
+                    {% if ext[1] in ['png', 'jpg'] %}
+                        <a href="{{ url_for('director.open_document', docname=doc.strip(), _external=True) }}" target="_blank">{{ doc }}</a>
+                    {% else %}
+                        <a href="https://docs.google.com/gview?url={{ url_for('director.open_document', docname=doc.strip(), _external=True) }}&embedded=true" target="_blank">{{ doc }}</a>
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        Відсутній</p>
+    {% endif %}
+    <p><strong>Комент:</strong> {{ tax.comment }}</p>
+    

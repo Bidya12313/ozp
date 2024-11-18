@@ -55,17 +55,7 @@
             {% if taxes %}
             {% for tax in taxes %}
                 {% if tax.typetx == 'На оплату' %}
-                <div class="request-card">
-                    <p><strong>Тип:</strong> {{tax.typetx}}</p>
-                    <p><strong>Час створення:</strong> {{tax.time}}</p>
-                    <p><strong>Заявник:</strong> {{tax.declarant}}</p>
-                    <p><strong>Платник:</strong> {{tax.payer}}</p>
-                    <p><strong>Керівник:</strong> {{tax.director}}</p>
-                    <p><strong>Отримувач:</strong> {{tax.recipient}}</p>
-                    <p><strong>Сума:</strong> {{tax.amount}}</p>
-                    <p><strong>Категорія:</strong> {{tax.category}}</p>
-                    <p><strong>Документ:</strong> {{tax.document}}</p>
-                    <p><strong>Комент:</strong> {{tax.comment}}</p>
+                    {% include 'tax_card.html' %}
                 {% elif tax.typetx == 'Зміна ліміту' %}
                 <div class="request-card">
                     <p><strong>Тип:</strong> Зміна ліміту</p>

@@ -2,6 +2,7 @@ import os
 
 from errors import FileNumberError
 
+
 def upload_documents(docs: list):
     if len(docs) > 5:
         raise FileNumberError

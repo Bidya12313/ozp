@@ -1,4 +1,4 @@
-from flask import Blueprint, flash, redirect, url_for, request
+from flask import Blueprint, flash, redirect, url_for, request, send_from_directory
 from flask_login import login_required
 
 from database.director_queries import (
@@ -55,4 +55,7 @@ def reject_tax():
     return redirect(url_for('main.director'))
 
 
+@director_routes.route('/uploads/<docname>')
+def open_document(docname):
+    return send_from_directory('../uploads', docname)
 
