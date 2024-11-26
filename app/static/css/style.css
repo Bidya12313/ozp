@@ -159,7 +159,7 @@ th {
 }
 
 /* Меню для мобільних */
-@media (max-width: 425px) {
+@media (max-width: 1024px) {
     .navbar-brgr {
         display: block; /* Відображаємо кнопку-бургер */
     }
