@@ -1,20 +1,9 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Для керівника</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <!-- navbar -->
-    {% include 'header.html' %}
+{% block title %}Для керівника{% endblock %}
 
-    {% block body %}
-    {% include 'flash_messages.html' %}
-    <div class="form-container">
+{% block content %}
+    <div class="container">
         <div class="form-header">Залишок в системі</div>
         <input type="text" id="limit" value="{{general_budget}}" readonly>
         <table id="idbudgetTable">
@@ -46,9 +35,6 @@
         </form>
     </div>
     
-    <!-- Script for select row and plug in forms in table -->
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
     <div class="requests-container">
         <h3>Заявки</h3>
         <div id="requests-list">
@@ -80,6 +66,4 @@
             {% endif %}
         </div>
     </div>
-    {% endblock %}
-</body>
-</html>
+{% endblock %}

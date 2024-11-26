@@ -1,141 +1,121 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Оформлення заявки на платіж</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <!-- navbar -->
-    {% include 'header.html' %}
+{% block title %}Оформлення заявки на платіж{% endblock %}
 
-    <!-- error message -->
-    {% include 'flash_messages.html' %}
-
-    {%block body%}
-        <div class="container">
-            <div class="header">
-                <h1>Оформлення заявки на платіж</h1>
-            </div>
-            
-            <div class="form-group">
-                <label for="limit">Поточний ліміт:</label>
-                <input type="text" id="limit" value="{{daily_budget}}" readonly>
-                <form method="POST" action="/change_limit" style="display: inline;">
-                    <button id="changelimit">Змінити</button>
-                </form>
-                <form method="post" action="/reset_limit" style="display: inline;">
-                    <button id="reset-limit" onclick="return confirm('Ви впевнені, що хочете обнулити ліміт?');">Обнулити ліміт</button>
-                </form>
-            </div>
-
-            <form method="POST" action="/create_tax" enctype="multipart/form-data">
-                <div class="form-group">
-                    <label for="applicant">Заявник:</label>
-                    <select id="applicant" name="declarant">
-                        <option>{{declarant}}</option>
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="payer">Оберіть платника:</label>
-                    <select id="payer" name="payer" required>
-                        {%for payer in payers%}
-                        <option>{{payer}}</option>
-                        {%endfor%}
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="manager">Оберіть керівника:</label>
-                    <select id="manager" name="director" required>
-                        {%for director in directors%}
-                        <option>{{director}}</option>
-                        {%endfor%}
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="recipient">Оберіть отримувача:</label>
-                    <input type="text" id="recipient" name="recipient" placeholder="Отримувач" required step="0.01">
-                </div>
-
-                <div class="form-group">
-                    <label for="category">Оберіть категорію:</label>
-                    <select id="category" name="category">
-                        {%for category in categories%}
-                        <option>{{category}}</option>
-                        {%endfor%}
-                    </select>
-                </div>
-
-                <div class="form-group">
-                    <label for="amount">Вкажіть суму:</label>
-                    <input type="number" id="amount" name="amount" placeholder="Тільки (0-9)" required step="0.01">
-                </div>
-
-                <div class="form-group">
-                    <label for="document">Прикріпіть документ:</label>
-                    <input type="file" id="document" name="documents" multiple accept=".jpg, .png, .pdf, .docx, .xlsm">
-                </div>
-
-                <div class="form-group">
-                    <label for="comment">Коментар:</label>
-                    <textarea id="comment" name="comment"></textarea>
-                </div>
-
-                <div class="container">
-                    <div class="table-wrapper"> <!-- Додано обгортку -->
-                        <table id="taxesTable">
-                            <thead>
-                                <tr>
-                                    <th>id</th>
-                                    <th>Тип</th>
-                                    <th>Заявник</th>
-                                    <th>Платник</th>
-                                    <th>Керівник</th>
-                                    <th>Отримувач</th>
-                                    <th>Сума</th>
-                                    <th>Категорія</th>
-                                    <th>Документ</th>
-                                    <th>Коментар</th>
-                                    <th>Час створення</th>
-                                    <th>Статус</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for tax in user_taxes %}
-                                <tr>
-                                    <td>{{tax.id}}</td>
-                                    <td>{{tax.typetx}}</td>
-                                    <td>{{tax.declarant}}</td>
-                                    <td>{{tax.payer}}</td>
-                                    <td>{{tax.director}}</td>
-                                    <td>{{tax.recipient}}</td>
-                                    <td>{{tax.amount}}</td>
-                                    <td>{{tax.category}}</td>
-                                    <td>{{tax.document}}</td>
-                                    <td>{{tax.comment}}</td>
-                                    <td>{{tax.time}}</td>
-                                    <td>{{tax.status}}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                
-                <!-- Script for select row and plug in forms in table -->
-                <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-
-                <div class="form-actions">
-                    <button id="submit" type="submit">Відправити</button>
-                </div>
-            </div> 
+{% block content %}
+    <div class="container">
+        <div class="form-group">
+            <label for="limit">Поточний ліміт:</label>
+            <input type="text" id="limit" value="{{daily_budget}}" readonly>
+            <form method="POST" action="/change_limit" style="display: inline;">
+                <button id="changelimit">Змінити</button>
             </form>
+            <form method="post" action="/reset_limit" style="display: inline;">
+                <button id="reset-limit" onclick="return confirm('Ви впевнені, що хочете обнулити ліміт?');">Обнулити ліміт</button>
+            </form>
+        </div>
+
+        <form method="POST" action="/create_tax" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="applicant">Заявник:</label>
+                <select id="applicant" name="declarant">
+                    <option>{{declarant}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="payer">Оберіть платника:</label>
+                <select id="payer" name="payer" required>
+                    {%for payer in payers%}
+                    <option>{{payer}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="manager">Оберіть керівника:</label>
+                <select id="manager" name="director" required>
+                    {%for director in directors%}
+                    <option>{{director}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="recipient">Оберіть отримувача:</label>
+                <input type="text" id="recipient" name="recipient" placeholder="Отримувач" required step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Оберіть категорію:</label>
+                <select id="category" name="category">
+                    {%for category in categories%}
+                    <option>{{category}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Вкажіть суму:</label>
+                <input type="number" id="amount" name="amount" placeholder="Тільки (0-9)" required step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="document">Прикріпіть документ:</label>
+                <input type="file" id="document" name="documents" multiple accept=".jpg, .png, .pdf, .docx, .xlsm">
+            </div>
+
+            <div class="form-group">
+                <label for="comment">Коментар:</label>
+                <textarea id="comment" name="comment"></textarea>
+            </div>
+
+            <div class="container">
+                <div class="table-wrapper"> <!-- Додано обгортку -->
+                    <table id="taxesTable">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Тип</th>
+                                <th>Заявник</th>
+                                <th>Платник</th>
+                                <th>Керівник</th>
+                                <th>Отримувач</th>
+                                <th>Сума</th>
+                                <th>Категорія</th>
+                                <th>Документ</th>
+                                <th>Коментар</th>
+                                <th>Час створення</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tax in user_taxes %}
+                            <tr>
+                                <td>{{tax.id}}</td>
+                                <td>{{tax.typetx}}</td>
+                                <td>{{tax.declarant}}</td>
+                                <td>{{tax.payer}}</td>
+                                <td>{{tax.director}}</td>
+                                <td>{{tax.recipient}}</td>
+                                <td>{{tax.amount}}</td>
+                                <td>{{tax.category}}</td>
+                                <td>{{tax.document}}</td>
+                                <td>{{tax.comment}}</td>
+                                <td>{{tax.time}}</td>
+                                <td>{{tax.status}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button id="submit" type="submit">Відправити</button>
+            </div>
+        </div> 
+        </form>
 
     <!-- Модальне вікно для зміни ліміту -->
     <div class="modal fade" id="updateLimitModal" tabindex="-1" aria-labelledby="updateLimitLabel" aria-hidden="true">
@@ -170,6 +150,5 @@
             $('#updateLimitModal').modal('show');
         });
     </script>
-    {%endblock%}
-</body>
-</html>
+{%endblock%}
+

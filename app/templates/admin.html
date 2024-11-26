@@ -1,19 +1,9 @@
-<!DOCTYPE html>
-<html lang="uk">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Форма SUP</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
+{% extends 'base.html' %}
 
-    <!-- navbar -->
-    {% include 'header.html' %}
+{% block title %}Адмін{% endblock %}
 
-    {% block body %}
-    <div class="form-container">
+{% block content %}
+    <div class="container">
         {% include 'flash_messages.html' %}
         <div class="form-header">Залишок в системі</div>
         <form method="POST" action="/set_budget">
@@ -51,9 +41,5 @@
             <button class="button">Обнулити ліміт</button>
         </form>
     </div>
-    
-    <!-- Script for select row and plug in forms in table -->
-    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
-    {% endblock %}
-</body>
-</html>
+{% endblock %}
+

@@ -59,3 +59,15 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const burger = document.querySelector(".navbar-brgr");
+    const navbarLeft = document.querySelector(".navbar-left");
+
+    if (burger && navbarLeft) {
+        burger.addEventListener("click", () => {
+            burger.classList.toggle("active");
+            navbarLeft.classList.toggle("active");
+        });
+    }
+});
