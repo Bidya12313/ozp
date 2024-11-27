@@ -5,7 +5,7 @@ from .budget_models import DailyBudget, GeneralBudget
 from .queries import get_general_budget
 
 
-def insert_general_budget(budget):
+def insert_general_budget(budget: float):
     with session_factory() as session:
         query = GeneralBudget(budget=budget)
         session.add(query)
@@ -19,7 +19,7 @@ def reset_all_budget():
         session.commit()
 
 
-def reset_user_budget(declarant):
+def reset_user_budget(declarant: str):
     with session_factory() as session:
         get_current_user_budget = select(DailyBudget.budget).filter(DailyBudget.declarant==declarant)
         result = session.execute(get_current_user_budget)

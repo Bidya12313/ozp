@@ -8,7 +8,7 @@ from .queries import get_general_budget, get_declarant_budget, get_tax
 from errors import BudgetExceededError
 
 
-def change_user_budget(declarant, required_budget):
+def change_user_budget(declarant: str, required_budget: float):
     with session_factory() as session:
         current_user_budget = float(get_declarant_budget(declarant))
         general_budget = float(get_general_budget())
@@ -30,7 +30,7 @@ def change_user_budget(declarant, required_budget):
         session.commit()
 
 
-def get_requested_taxes(status):
+def get_requested_taxes(status: str):
     with session_factory() as session:
         get_taxes = select(Taxes).filter(Taxes.status==status).order_by(desc(Taxes.id))
         result = session.execute(get_taxes)

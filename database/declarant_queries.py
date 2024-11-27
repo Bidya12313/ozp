@@ -8,7 +8,7 @@ from .queries import get_declarant_budget
 from errors import BudgetExceededError
 
 
-def update_delcarant_budget(declarant, budget):
+def update_delcarant_budget(declarant: str, budget: float):
     with session_factory() as session:
         query = update(DailyBudget).values(budget=budget).filter(DailyBudget.declarant==declarant)
         result = session.execute(query)
