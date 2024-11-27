@@ -180,6 +180,32 @@ th {
     .navbar-left.active {
         display: flex; /* Показуємо меню при активації */
     }
+
+    .table-wrapper {
+        display: block;
+    }
+
+    .table-wrapper thead {
+        display: none;
+    }
+
+    .table-wrapper tbody tr {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .table-wrapper tbody tr td {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    .table-wrapper tbody tr td::before {
+        content: attr(data-label); /* Додає назву стовпця */
+        font-weight: bold;
+        margin-right: 10px;
+    }
 }
 
 .account-nickname {

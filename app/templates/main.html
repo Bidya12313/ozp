@@ -92,18 +92,18 @@
                         <tbody>
                             {% for tax in user_taxes %}
                             <tr>
-                                <td>{{tax.id}}</td>
-                                <td>{{tax.typetx}}</td>
-                                <td>{{tax.declarant}}</td>
-                                <td>{{tax.payer}}</td>
-                                <td>{{tax.director}}</td>
-                                <td>{{tax.recipient}}</td>
-                                <td>{{tax.amount}}</td>
-                                <td>{{tax.category}}</td>
-                                <td>{{tax.document}}</td>
-                                <td>{{tax.comment}}</td>
-                                <td>{{tax.time}}</td>
-                                <td>{{tax.status}}</td>
+                                <td data-label="id:">{{tax.id}}</td>
+                                <td data-label="Тип:">{{tax.typetx}}</td>
+                                <td data-label="Заявник:">{{tax.declarant}}</td>
+                                <td data-label="Платник:">{{tax.payer}}</td>
+                                <td data-label="Керівник:">{{tax.director}}</td>
+                                <td data-label="Отримувач:">{{tax.recipient}}</td>
+                                <td data-label="Сума:">{{tax.amount}}</td>
+                                <td data-label="Категорія:">{{tax.category}}</td>
+                                <td data-label="Документ">{{tax.document}}</td>
+                                <td data-label="Коментар:">{{tax.comment}}</td>
+                                <td data-label="Час створення:">{{tax.time}}</td>
+                                <td data-label="Статус:">{{tax.status}}</td>
                             </tr>
                             {% endfor %}
                         </tbody>
