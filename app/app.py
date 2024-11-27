@@ -1,5 +1,5 @@
-from flask import Flask, render_template, flash, redirect, url_for
-from flask_login import LoginManager, login_user, login_required, current_user
+from flask import Flask
+from flask_login import LoginManager
 
 from .main_routes import main_routes
 from .auth_routes import auth_routes

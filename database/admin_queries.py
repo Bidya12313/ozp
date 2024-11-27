@@ -1,4 +1,4 @@
-from sqlalchemy import select, insert, update
+from sqlalchemy import select, update
 
 from .engine import session_factory
 from .budget_models import DailyBudget, GeneralBudget

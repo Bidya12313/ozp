@@ -1,4 +1,4 @@
-from sqlalchemy import select, insert, desc
+from sqlalchemy import select, desc
 
 from .engine import session_factory
 from .models import Base, Users, Payers, Categories, Banks
