@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+
+{% block title %}Оформлення заявки на платіж{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="form-group">
+            <label for="limit">Поточний ліміт:</label>
+            <input type="text" id="limit" value="{{daily_budget}}" readonly>
+            <form method="POST" action="/change_limit" style="display: inline;">
+                <button id="changelimit">Змінити</button>
+            </form>
+            <form method="post" action="/reset_limit" style="display: inline;">
+                <button id="reset-limit" onclick="return confirm('Ви впевнені, що хочете обнулити ліміт?');">Обнулити ліміт</button>
+            </form>
+        </div>
+
+        <form method="POST" action="/create_tax" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="applicant">Заявник:</label>
+                <select id="applicant" name="declarant">
+                    <option>{{declarant}}</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="payer">Оберіть платника:</label>
+                <select id="payer" name="payer" required>
+                    {%for payer in payers%}
+                    <option>{{payer}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="manager">Оберіть керівника:</label>
+                <select id="manager" name="director" required>
+                    {%for director in directors%}
+                    <option>{{director}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="recipient">Оберіть отримувача:</label>
+                <input type="text" id="recipient" name="recipient" placeholder="Отримувач" required step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="category">Оберіть категорію:</label>
+                <select id="category" name="category">
+                    {%for category in categories%}
+                    <option>{{category}}</option>
+                    {%endfor%}
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Вкажіть суму:</label>
+                <input type="number" id="amount" name="amount" required step="0.01">
+            </div>
+
+            <div class="form-group">
+                <label for="document">Прикріпіть документ:</label>
+                <input type="file" id="document" name="documents" multiple accept=".jpg, .png, .pdf, .docx, .xlsm">
+            </div>
+
+            <div class="form-group">
+                <label for="comment">Коментар:</label>
+                <textarea id="comment" name="comment"></textarea>
+            </div>
+
+            <div class="container">
+                <div class="table-wrapper"> <!-- Додано обгортку -->
+                    <table id="taxesTable">
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>Тип</th>
+                                <th>Заявник</th>
+                                <th>Платник</th>
+                                <th>Керівник</th>
+                                <th>Отримувач</th>
+                                <th>Сума</th>
+                                <th>Категорія</th>
+                                <th>Документ</th>
+                                <th>Коментар</th>
+                                <th>Час створення</th>
+                                <th>Статус</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for tax in user_taxes %}
+                            <tr>
+                                <td data-label="id:">{{tax.id}}</td>
+                                <td data-label="Тип:">{{tax.typetx}}</td>
+                                <td data-label="Заявник:">{{tax.declarant}}</td>
+                                <td data-label="Платник:">{{tax.payer}}</td>
+                                <td data-label="Керівник:">{{tax.director}}</td>
+                                <td data-label="Отримувач:">{{tax.recipient}}</td>
+                                <td data-label="Сума:">{{tax.amount}}</td>
+                                <td data-label="Категорія:">{{tax.category}}</td>
+                                <td data-label="Документ">{{tax.document}}</td>
+                                <td data-label="Коментар:">{{tax.comment}}</td>
+                                <td data-label="Час створення:">{{tax.time}}</td>
+                                <td data-label="Статус:">{{tax.status}}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button id="submit" type="submit">Відправити</button>
+            </div>
+        </div> 
+        </form>
+
+    <!-- Модальне вікно для зміни ліміту -->
+    <div class="modal fade" id="updateLimitModal" tabindex="-1" aria-labelledby="updateLimitLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="updateLimitLabel">Зміна ліміту</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Закрити">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="POST" action="/change_limit">
+                        <div class="form-group">
+                            <label for="newLimit">Новий ліміт</label>
+                            <input type="number" id="change-limit" name="new_limit" required step="0.01">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Змінити</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        document.getElementById('changelimit').addEventListener('click', function(event) {
+            event.preventDefault();
+            $('#updateLimitModal').modal('show');
+        });
+    </script>
+{%endblock%}
+

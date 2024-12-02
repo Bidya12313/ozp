@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Для оператора{% endblock %}
+
+{% block content %}
+    <div class="requests-container">
+
+        <h3>Заявки(Оплата)</h3>
+        <div id="requests-list">
+            {% if bank_taxes %}
+            {% for tax in bank_taxes %}
+                {% include 'tax_card.html' %}
+                    <h5><strong>Банк: {{tax.bank}}</h5></strong>
+                    <div class="button-container">
+                        <form method="POST" action="/pay">
+                            <input type="hidden" name="request_id" value="{{ tax.id }}">
+                            <button type="submit" class="approve-btn">Оплачено</button>
+                        </form>
+                    </div>
+                </div>
+            {% endfor %}
+            {% else %}
+            <h5 style="text-align: center;">Нові заявки відсутні!</h5>
+            <p style="text-align: center;">-------------------------------------------</p>
+            {% endif %}
+        <h3>Заявки</h3>
+        <div id="requests-list">
+            {% if taxes %}
+            {% for tax in taxes %}
+                {% include 'tax_card.html' %}
+                    <form method="POST" action="/choose_bank">
+                        <div class="form-group">
+                            <label for="cbank">Оберіть банк:</label>
+                            <select id="bank" name="bank" required>
+                                {%for bank in banks%}
+                                <option>{{bank}}</option>
+                                {%endfor%}
+                            </select>
+                        </div>
+                        <div class="button-container">
+                            <input type="hidden" name="request_id" value="{{ tax.id }}">
+                            <button type="submit" class="button">Обрати банк</button>
+                        </div>
+                    </form>
+                </div>
+            {% endfor %}
+            {% else %}
+            <h5 style="text-align: center;">Нові заявки відсутні!</h5>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
