@@ -8,7 +8,7 @@ To run the application, follow these steps:
 
 1. Navigate to the project directory:
     ```bash
-    cd oznp
+    cd ozp
     ```
 2. Run the application with the following command:
     ```bash
